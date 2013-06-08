@@ -13,6 +13,8 @@ CREATE TABLE `yeedt_trans` (
   `qualityLevels` varchar(32) DEFAULT NULL,
   `wordCount` int(11) DEFAULT NULL,
   `price` varchar(32) DEFAULT NULL,
+  `phone` varchar(16) DEFAULT NULL,
+  `email` varchar(64) DEFAULT NULL,
   `languages_key` varchar(32) DEFAULT NULL,
   `qualityLevels_key` varchar(32) DEFAULT NULL,
   PRIMARY KEY (`id`)
