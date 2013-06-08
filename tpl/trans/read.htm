@@ -1,0 +1,285 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<?php
+print <<<EOT
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>查看翻译详情</title>
+<link rel="stylesheet" href="css/yeedt_index.css" type="text/css">
+
+<script src="js/dialog/artDialog.js?skin=default"></script>
+<script src="js/dialog/artDialog.iframeTools.js"></script>
+<script>
+function showConfirm(id)
+{
+	art.dialog({
+	    content: '已跳转至支付平台支付<br />支付成功后点击确认付款',
+	    icon: 'warning',
+	    noText: '遇到问题',
+	    yesText: '支付成功',
+	    yesFn: function () {
+	    	window.location='trans.php?job=getPayStatus&id='+id;
+	        return true;
+	    },
+	    noFn: function () {
+	    	window.location='trans.php?job=getPayStatus&id='+id;
+	        return true;
+	    },
+	});
+}
+
+</script>
+</head>
+<body>
+<div class="y_nav">
+	<ul>
+	  <a href="trans.php?job=trans" target="_parent"><li class="nav_1 topNav"></li></a>
+	  <a href="trans.php" target="_parent"><li class="nav_2 topNav selected"></li></a>
+	  <a href="member.php" target="_parent"><li class="nav_3 topNav"></li></a>
+	  <a href="help.php" target="_parent"><li class="nav_4 topNav"></li></a>
+	  <a href="msg.php" target="_parent"><li class="nav_5 topNav"></li></a>
+	</ul>
+	<div style='width:100%px;height:40px;color:#FF0000; font-size:16px;margin:5px auto 0px;text-align:center;overflow:hidden; '>
+	<iframe src ="http://www.yeedt.com/p/aboutus.htm" frameborder="0" marginheight="0" marginwidth="0" height='40' frameborder="0" scrolling="auto" id="ifm" name="ifm"  width="600"> 
+	</iframe> 
+	</div>
+</div>
+<div class="y_list">
+	<div class="y_info_tra">
+		<div class="tit">查看翻译详情</div>
+		<div class="cont">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<!--
+EOT;
+if($rsdb[yeedt_order_id] !='')
+{
+print <<<EOT
+-->
+				<tr>
+					<td>订单编号：</td>
+					<td>
+						$rsdb[yeedt_order_id]
+					</td>				
+				</tr>
+<!--
+EOT;
+}
+print <<<EOT
+-->			
+				
+				<tr>
+					<td width="90" valign="top">语言方向：</td>
+					<td>
+						 $rsdb[languages]
+					</td>				
+				</tr>
+				<tr>
+					<td>翻译级别：</td>
+					<td>
+						 $rsdb[qualityLevels]
+					</td>				
+				</tr>
+				<tr>
+					<td>翻译字数：</td>
+					<td>
+						 $rsdb[wordCount] 字
+					</td>				
+				</tr>
+				<tr>
+					<td>翻译费用：</td>
+					<td>
+						$rsdb[price] 元
+					</td>				
+				</tr>
+				
+				<tr>
+					<td>原文标题：</td>
+					<td>$rsdb[title]
+<!--
+EOT;
+if($rsdb[author] =='file')
+{
+print <<<EOT
+-->	
+		<a href="$requestUrl/user/download?orderId=$rsdb[yeedt_order_id]" target="_blank">下载原文</a>
+<!--
+EOT;
+}
+print <<<EOT
+-->	
+					</td>				
+				</tr>
+				
+				
+				<tr>
+					<td>译文标题：</td>
+					<td>
+<!--
+EOT;
+if($rsdb[en_title] != '' && $rsdb[status] == 'finish')
+{
+	$rsdb[en_title] = $rsdb[en_title];
+} elseif($rsdb[status] == 'new') {
+	$rsdb[en_title] = '未支付，请及时付款！';
+} elseif($rsdb[status] == 'paid') {
+	$rsdb[en_title] = '翻译中。。。';
+}
+print <<<EOT
+-->					
+						$rsdb[en_title]
+<!--
+EOT;
+if($rsdb[author] =='file' && 'finish' == $rsdb[status] && '' != $rsdb[en_title])
+{
+print <<<EOT
+-->	
+		<a href="$requestUrl/user/downloadTDocument?orderId=$rsdb[yeedt_order_id]" target="_blank">下载译文</a>
+<!--
+EOT;
+}
+print <<<EOT
+-->						  
+					</td>				
+				</tr>
+<!--
+EOT;
+if($rsdb[author] !='file')
+{
+print <<<EOT
+-->				
+				
+				<tr>
+					<td style="vertical-align:top">原文内容：</td>
+					<td>
+<div id="hutia">$rsdb[content]</div>
+  <script>
+(function(){
+  var o = document.getElementById("hutia");
+  var s = o.innerHTML;
+  var p = document.createElement("span");
+  var n = document.createElement("a");
+  p.innerHTML = s.substring(0,120);
+  n.innerHTML = s.length > 120 ? "&nbsp;&nbsp;查看所有内容" : "";
+  n.href = "###";
+  n.onclick = function(){
+    if (n.innerHTML == "&nbsp;&nbsp;查看所有内容"){
+      n.innerHTML = "&nbsp;&nbsp;收起内容";
+      p.innerHTML = s;
+    }else{
+      n.innerHTML = "&nbsp;&nbsp;查看所有内容";
+      p.innerHTML = s.substring(0,120);
+    }
+  }
+  o.innerHTML = "";
+  o.appendChild(p);
+  o.appendChild(n);
+})();
+  </script> 
+					</td>				
+				</tr>
+				
+				<tr>
+					<td style="vertical-align:top">译文内容：<br />
+
+
+
+
+
+</td>
+
+
+					<td>
+						<!--
+EOT;
+if($rsdb[en_content] != '' && $rsdb[status] == 'finish')
+{
+print <<<EOT
+-->
+<a href="#" onclick="copyText(document.all.en_content)" style="color:#F00">点击复制</a><br />
+
+<script type="text/javascript">function copyText(obj)   
+{ 
+var rng = document.body.createTextRange(); 
+rng.moveToElementText(obj); 
+rng.scrollIntoView(); 
+rng.select(); 
+rng.execCommand("Copy"); 
+rng.collapse(false);
+alert("复制成功!"); 
+} 
+</script>
+<!--
+EOT;
+}
+print <<<EOT
+-->						  
+
+
+<!--
+EOT;
+if($rsdb[en_content] != '' && $rsdb[status] == 'finish')
+{
+	$rsdb[en_content] = $rsdb[en_content];
+} elseif($rsdb[status] == 'new') {
+	$rsdb[en_content] = '未支付，请及时付款！';
+} elseif($rsdb[status] == 'paid') {
+	$rsdb[en_content] = '翻译中。。。';
+}
+print <<<EOT
+-->
+<span id="en_content">$rsdb[en_content]</span>
+					</td>
+                    
+                    
+                    				
+				</tr>
+				
+<!--
+EOT;
+}
+print <<<EOT
+-->					
+				<tr>
+					<td></td>
+					<td align="center">
+					<div class="y_info_btns">
+					<a href="javascript:history.go(-1);" class='submit'>返回</a>
+			
+<!--
+EOT;
+if($rsdb[status] =='new'||$rsdb[status] =='')
+{
+	if($rsdb[author] !='file')
+	{
+print <<<EOT
+-->
+	<a href="?job=pay&id=$rsdb[id]" class='submit' target="_parent _blank" onclick="showConfirm('$rsdb[id]')">点击支付</a>
+<!--
+EOT;
+	}
+	else
+	{
+print <<<EOT
+-->	
+	<a href="?job=filePay&id=$rsdb[id]" class='submit' target="_parent _blank" onclick="showConfirm('$rsdb[id]')">点击支付</a>
+<!--
+EOT;
+	}
+}
+print <<<EOT
+-->			
+					</div>
+					</td>				
+				</tr>
+			</table>
+			
+	</div>
+</div>
+
+</body>
+</html>
+<!--
+EOT;
+?>
+-->

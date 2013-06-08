@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<!--<?php
+print <<<EOT
+-->
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>阅读消息详情</title>
+<link rel="stylesheet" href="images/admin/style.css" type="text/css">
+</head>
+<body>
+<div class="y_nav">
+	<ul>
+		<a href="trans.php?job=trans" target="_parent"><li class="nav_1 topNav"></li></a>
+		<a href="trans.php" target="_parent"><li class="nav_2 topNav"></li></a>
+		<a href="member.php" target="_parent"><li class="nav_3 topNav"></li></a>
+		<a href="help.php" target="_parent"><li class="nav_4 topNav"></li></a>
+		<a href="msg.php" target="_parent"><li class="nav_5 topNav selected"></li></a>
+	</ul>
+	<div style='width:100%px;height:40px;color:#FF0000; font-size:16px;margin:5px auto 0px;text-align:center;overflow:hidden; '>
+	<iframe src ="http://www.yeedt.com/p/aboutus.htm" frameborder="0" marginheight="0" marginwidth="0" height='40' frameborder="0" scrolling="auto" id="ifm" name="ifm"  width="600"> 
+	</iframe> 
+	</div>
+</div>
+<table width='100%' cellspacing='1' cellpadding='3' bgcolor='#CCCCCC' class="tablewidth">
+  
+    <tr class="head"> 
+      <td colspan="3" align="left"> 
+		查看消息详情
+      </td>
+    </tr>
+    <tr bgcolor='#FFFFFF'> 
+      <td width='19%'> 
+        <div align="left">消息内容：</div>
+      </td>
+      <td bgcolor='#FFFFFF' colspan="2"> 
+        $rsdb[msg]
+      </td>
+    </tr>
+    <tr bgcolor='#FFFFFF'> 
+      <td width='19%'> 
+        <div align="left">消息时间：</div>
+      </td>
+      <td bgcolor='#FFFFFF' colspan="2"> 
+        $posttime
+      </td>
+    </tr>
+    <tr bgcolor='#FFFFFF'> 
+      <td width='19%'> 
+        <div align="left">消息状态：</div>
+      </td>
+      <td bgcolor='#FFFFFF' colspan="2"> 
+<!--
+EOT;
+if($rsdb[is_read] =='0')
+{
+print <<<EOT
+-->
+	<span style="color: red">未读</span>
+ <!--
+EOT;
+}
+else
+{
+print <<<EOT
+-->
+	<span style="color:green;">已读</span>
+<!--
+EOT;
+}
+print <<<EOT
+-->
+      </td>
+    </tr>
+   
+    <tr bgcolor='#FFFFFF'> 
+      <td width='19%'> 
+        <div align="left">翻译状态：</div>
+      </td>
+      <td bgcolor='#FFFFFF' colspan="2"> 
+<!--
+EOT;
+if($rsdb[type] =='finish')
+{
+print <<<EOT
+-->
+	<span style="color: green">翻译完成</span>
+ <!--
+EOT;
+}
+else if($rsdb[type] =='paid')
+{
+print <<<EOT
+-->
+	<span style="color:fuchsia;">已支付，翻译中</span>
+
+<!--
+EOT;
+}
+print <<<EOT
+-->
+      </td>
+    </tr>
+   
+   
+</table>
+
+</body>
+</html>
+<!--
+EOT;
+?>
+-->
