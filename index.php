@@ -5,6 +5,5 @@ if(!file_exists('./inc/install.lock')){
 	}
 }
 	
-
-include 'tpl/trans/trans.htm';
+header("Location: trans.php?job=trans");
 ?>
