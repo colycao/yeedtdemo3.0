@@ -1,4 +1,5 @@
 <?php header("Content-type:text/html;charset=utf-8");
+session_start();
 require_once 'global.php';
 
 switch ($job)
@@ -169,7 +170,6 @@ switch ($job)
 			include 'tpl/trans/translation.htm';
 		break;
 	case 'delete':
-      session_start();
       if(!isset($_SESSION['username']) || $yeedt_id != $_SESSION['username'])
       {
         header ("Location:login.php");
@@ -283,9 +283,7 @@ switch ($job)
 		break;	
 		
 	default:
-      session_start();
-      //if(!isset($_SESSION['username']) || $yeedt_id != $_SESSION['username'])
-      if(!isset($_SESSION['username']))
+      if(!isset($_SESSION['username']) || $yeedt_id != $_SESSION['username'])
       {
         header ("Location:login.php");
       }
