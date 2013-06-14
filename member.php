@@ -1,4 +1,9 @@
 <?php header("Content-type:text/html;charset=utf-8");
+session_start();
+if(!isset($_SESSION['username']))
+{
+  header ("Location:login.php");
+}
 require_once 'global.php';
 if($submit)
 {
